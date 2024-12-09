@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container mb-5 mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Student Details</h1>
+        </div>
+        <div class="card-body">
+            <h2 class="card-text">{{student.fullname}}</h2>
+            <p class="card-text"><b>Phone: </b>{{student.phone}}</p>
+            <p class="card-text"><b>Address: </b>{{student.address}}</p>
+            <p class="card-text"><b>Date of add: </b>{{student.created}}</p>
+            <p class="card-text"><b>Birth date: </b>{{student.birth_date}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header"><h1>Teacher</h1></div>
+        <div class="card-body">
+            {% for group in student.group.all %}
+            {% for teacher in group.teachers.all %}
+                <p class="card-text"><a href="{% url 'teacher_detail' teacher.uuid %}" class="text-a"><b>{{ forloop.counter }}.</b>   {{teacher.fullname}}</a></p>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Groups</h1>
+        </div>
+        <div class="card-body">
+            {% for group in student.group.all %}
+                {% if group %}
+                    <h4><a href="{% url 'group_detail' group.uuid %}" class="text-a">{{group.title}},</a></h4>
+                {% else %}
+                    <h4>No groups found</h4>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div><br><br>
+
+    <a href="{% url 'student_list' %}" class="btn btn-outline-light btn-info">List</a>
+</div>
+
+
+
+{% endblock content %}

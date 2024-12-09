@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<style>
+    .col{
+        background-color: rgba(252, 242, 242, 0.447);
+        color: black;
+        border-radius: 5px;
+        text-align: center;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+    <h2>Search Results</h2>
+    <div class="row">
+            <div class="card col m-2">
+                <div class="card-header">
+                    <h3>Teachers</h3>
+                </div>
+                <div class="card-body">
+                {% for teacher in teacher_results %}
+                    <p class="card-text"><b>{{forloop.counter}}.</b>  <a href="{% url 'teacher_detail' teacher.uuid %}" class="text-a">{{ teacher.fullname }}</a></p>
+                {% empty %}
+                    <p class="card-text"><b>{{forloop.counter}}</b>  No teacher found.</p>
+                {% endfor %}          
+                </div>
+            </div>
+
+            <div class="card col m-2">
+                <div class="card-header">
+                    <h3>Students</h3>
+                </div>
+                <div class="card-body">
+                {% for student in student_results %}
+                    <p class="card-text"><b>{{forloop.counter}}.</b>  <a href="{% url 'student_detail' student.uuid %}" class="text-a">{{ student.fullname }}</a></p>
+                {% empty %}
+                    <p class="card-text"><b>{{forloop.counter}}</b>  No student found.</p>
+                {% endfor %}          
+                </div>
+            </div>
+
+            <div class="card col m-2">
+                <div class="card-header">
+                    <h3>Groups</h3>
+                </div>
+                <div class="card-body">
+                {% for group in group_results %}
+                    <p class="card-text"><b>{{forloop.counter}}.</b>  <a href="{% url 'group_detail' group.uuid %}" class="text-a">{{ group.title }}</a></p>
+                {% empty %}
+                    <p class="card-text"><b>{{forloop.counter}}</b>  No group found.</p>
+                {% endfor %}          
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

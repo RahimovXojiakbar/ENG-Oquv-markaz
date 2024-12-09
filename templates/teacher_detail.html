@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Teacher Details</h1>
+        </div>
+        <div class="card-body">
+            <h3 class="card-text">{{teacher.fullname}}</h3>
+            <p class="card-text"><b>Phone: </b>{{teacher.phone}}</p>
+            <p class="card-text"><b>Level: </b>{{teacher.level}}</p>
+            <p class="card-text"><b>Birth date: </b>{{teacher.birth_date}}</p>
+            <p class="card-text"><b>Hire date: </b>{{teacher.hire_time}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Group</h1>
+        </div>
+        <div class="card-body">
+            {% for group in teacher.group.all %}
+                <p class="card-text"><b><a href="{% url 'group_detail' group.uuid %}" class="text-a">{{group.title}},</a></b></p>
+            {% endfor %}
+        </div>
+    </div>
+    <br><br>
+    <a href="{% url 'teacher_list' %}" class="btn btn-outline-light btn-info">List</a>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="container mb-5 mt-5">
+    <div class="card">
+        <div class="card-header">
+          <h1>Waiting Groups</h1>
+          <form class="row gy-2 gx-3 justify-content-center" action="{% url 'home' %}" method="get">
+            <div class="col">
+              <label for="autoSizingSelect" class="visually-hidden">Preference</label>
+              <select name="waiting-level" id="autoSizingSelect" class="form-select">
+                <option value="0" selected>Choose Level</option>
+                <option value="STARTER">STARTER</option>
+                <option value="BEGINNER">BEGINNER</option>
+                <option value="INTERMEDIATE">INTERMEDIATE</option>
+                <option value="PREINTERMEDIATE">PREINTERMEDIATE</option>
+                <option value="UPPERINTERMEDIATE">UPPERINTERMEDIATE</option>
+                <option value="ADVANCED">ADVANCED</option>
+                <option value="IELTS">IELTS</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="autoSizingSelect" class="visually-hidden">Preference</label>
+              <select name="waiting-sort" id="autoSizingSelect" class="form-select">
+                <option selected>Sort by</option>
+                <option value="1">A-z</option>
+                <option value="2">Z-a</option>
+                <option value="3">Created ↑</option>
+                <option value="4">Created ↓</option>
+                <option value="5">Price ↑</option>
+                <option value="6">Price ↓</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Level</th>
+                        <th>Price</th>
+                        <th>Students</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for group in paginatsa %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <td><a href="{% url 'group_detail' group.uuid %}" class="text-a">{{group.title}}</a></td>
+                        <td>{{group.level}}</td>
+                        <td>{{group.price}} $</td>
+                        <td>{{group.students.count}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>    
+            </table> 
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination mt-5 mb-5 justify-content-center">
+            {% if paginatsa.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'home' %}?page={{paginatsa.previous_page_number}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% endif %}
+          <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{paginatsa.number}}">{{paginatsa.number}}</a></li>
+          {% if paginatsa.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'home' %}?page={{paginatsa.next_page_number}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+</div>
+
+
+{% endblock content %}

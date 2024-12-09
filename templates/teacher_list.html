@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Teachers</h1>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fullname</th>
+                        <th>Level</th>
+                        <th>Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for teacher in pajinatsiya %}
+                        <tr>
+                            <th>{{forloop.counter}}</th>
+                            <td><a href="{% url 'teacher_detail' teacher.uuid %}" class="text-a">{{teacher.fullname}}</a></td>
+                            <td>{{teacher.level}}</td>
+                            {% for group in teacher.group.all %}
+                            <td>{{group.title}}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-5 mb-5">
+            {% if pajinatsiya.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'teacher_list' %}?page={{pajinatsiya.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="{% url 'teacher_list' %}?page={{pajinatsiya.number}}">{{pajinatsiya.number}}</a></li>
+            {% if pajinatsiya.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'teacher_list' %}?page={{pajinatsiya.next_page_number}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+          {% endif %}
+        </ul>
+      </nav>
+</div>
+
+
+
+{% endblock content %}

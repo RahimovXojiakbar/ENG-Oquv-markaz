@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Group Details</h1>
+        </div>
+        <div class="card-body">
+            <h2 class="card-text">{{group.title}}</h2>
+            <p class="card-text"><b>Level: </b>{{group.level}}</p>
+            <p class="card-text"><b>Status: </b>{{group.status}}</p>
+            <p class="card-text"><b>Price: </b>{{group.price}}$</p>
+            <p><b>Desctiption: </b>{{group.description}}</p>
+            <p class="card-text"><b>Created Date: </b>{{group.created}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Group Students</h1>
+        </div>
+        <div class="card-body">
+            <div class="row"> <!-- Row sinfi qo'shildi -->
+                {% for student in group.students.all %}
+                <div class="col-md-4 mb-3"> <!-- Har bir ustun uchun col-md-4 qo'shildi -->
+                    <p><b>{{forloop.counter}}. </b><a href="{% url 'student_detail' student.uuid %}" class="text-a">{{student.fullname}}</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Group Teachers</h1>
+        </div>
+        <div class="card-body">
+            {% for teacher in group.teachers.all %}
+                <p class="card-text"><b>{{forloop.counter}}. </b><a href="{% url 'teacher_detail' teacher.uuid %}" class="text-a"><b>{{teacher.fullname}},</b></a></p>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <a href="{% url 'group_list' %}" class="btn btn-outline-light btn-info">List</a>
+</div>
+
+{% endblock content %}

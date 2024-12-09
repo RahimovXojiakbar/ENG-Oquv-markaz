@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container mb-5 mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>Students</h1>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fullname</th>
+                        <th>Group</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in paginatsa %}
+                    <tr>
+                        <th>{{forloop.counter}}</th>
+                        <td><a href="{% url 'student_detail' student.uuid %}" class="text-a">{{student.fullname}}</a></td>
+                        {% for group in student.group.all %}
+                            <td>{{group.title}}</td>
+                        {% endfor %}
+                        <td>{{student.phone}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-5 mb-5">
+            {% if paginatsa.has_previous %} 
+            <li class="page-item">
+                <a class="page-link" href="{% url 'student_list' %}?page={{paginatsa.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+            
+          <li class="page-item"><a class="page-link" href="{% url 'student_list' %}?page={{paginatsa.number}}">{{paginatsa.number}}</a></li>
+            {% if paginatsa.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'student_list' %}?page={{paginatsa.next_page_number}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+        
+        </ul>
+      </nav>
+</div>
+
+
+{% endblock %}
