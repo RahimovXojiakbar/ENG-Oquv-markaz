@@ -136,3 +136,5 @@ def Search_view(request):
     }
     return render(request, 'search_results.html', context)
 
+
+

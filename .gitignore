@@ -1,6 +1,4 @@
+env
 db.sqlite3
-main/migrations/**
-!main/migrations/__init.py
 main/__pycache__/**
 config/__pycache__/**
-env
