@@ -7,36 +7,44 @@ Loyiha maqsadi : O'quv markaz malumotlarini raqamlashtirish
 - CSS
 
 ## O'rnatish
+Quyidagi harakatlar terminal (bash) da amalga oshirilsin
 1. Repositoryni klonlang:
    ```bash
    git clone https://github.com/RahimovXojiakbar/ENG-Oquv-markaz.git
 
-2. Virtual muhit yarating:
+2. Loyiha papkasiga o'ting:
+   ```bash
+   cd ENG-Oquv-markaz
+
+3. Virtual muhit yarating:
    ```bash
    py -m venv env
 
+4. Virtual muhitni faollashtiring:
+   ```bash
+   .\env\Scripts\activate
 
-3. Zarur paketlarni o'rnating:
+5. Zarur paketlarni o'rnating:
    ```bash
    pip install -r requirements.txt
 
-4. Ma'lumotlar Bazasiga malumotlarni yarating:
+6. Ma'lumotlar Bazasiga malumotlarni yarating:
    ```bash
    py generate.py
-5. migrations papkasini yarating:
+7. migrations papkasini yarating:
    ```bash
    py manage.py makemigrations
-6. Ma'lumotlar bazasiga kerakli jadvallarni yarating:
+8. Ma'lumotlar bazasiga kerakli jadvallarni yarating:
     ```bash
      py manage.py migrate
    
-7. Adminkaga kirish uchun superuser yarating:
+9. Adminkaga kirish uchun superuser yarating:
    ```bash
    py manage.py createsuperuser
 
-8. Ishga tushiring
-   ```bash
-   py manage.py runserver
+10. Ishga tushiring
+    ```bash
+    py manage.py runserver
 
 
 ## Muallif 
